@@ -20,6 +20,10 @@ Two modes, toggled from the page:
 
 ## Install
 
+**[Chrome Web Store](https://chromewebstore.google.com/detail/dpjdldibnlfjlladnpfdncijbilclibn/)** (in review)
+
+Or from source:
+
 1. Open `chrome://extensions`
 2. Enable **Developer mode** (top right)
 3. **Load unpacked** → select this folder

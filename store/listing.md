@@ -65,6 +65,8 @@ LinkedIn in the opened window, profile persists in `.playwright-profile/`):
    https://github.com/fregante/chrome-webstore-upload-keys
 4. Add GitHub repo secrets: CWS_EXTENSION_ID, CWS_CLIENT_ID, CWS_CLIENT_SECRET,
    CWS_REFRESH_TOKEN.
+   Extension ID: `dpjdldibnlfjlladnpfdncijbilclibn`
+   Listing: https://chromewebstore.google.com/detail/dpjdldibnlfjlladnpfdncijbilclibn/
 5. Release: bump "version" in manifest.json + package.json, then
    `git tag v<version> && git push --tags` — the workflow builds, uploads, and
    publishes.
