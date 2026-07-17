@@ -13,6 +13,9 @@
   var OFF = /(?:^|;\s*)lifg_off=1/.test(document.cookie);
   // gate for the chrome-hiding CSS; runs at document_start so there's no flash
   if (!OFF) document.documentElement.classList.add("lifg-on");
+  // game pages get extra hides (header, messaging bubble) in both modes
+  if (/^\/games([/?#]|$)/.test(location.pathname))
+    document.documentElement.classList.add("lifg-games");
 
   // gameTypeId -> game (order below is the fallback if the API is down;
   // real order comes from the API response, which matches the hub)

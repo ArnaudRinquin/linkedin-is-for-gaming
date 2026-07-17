@@ -13,10 +13,12 @@ html.lifg-on section.scaffold-layout-toolbar {
 }
 
 /* game pages stay plain-faced even when the extension is paused.
-   #interop-outlet is the shadow-DOM host of the messaging bubble */
-#root header,
-#interop-outlet,
-iframe[src*="/preload"] {
+   #interop-outlet is the shadow-DOM host of the messaging bubble — but on
+   Ember pages (feed etc.) the same outlet hosts the post composer, so this
+   MUST stay scoped to game pages (html.lifg-games, set at document_start) */
+html.lifg-games #root header,
+html.lifg-games #interop-outlet,
+html.lifg-games iframe[src*="/preload"] {
   display: none !important;
 }
 
