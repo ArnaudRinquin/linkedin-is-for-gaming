@@ -1,8 +1,10 @@
 # 🎮 LinkedIn is for Gaming
 
-![LinkedIn is for gaming](store/promo/marquee-promo-tile.jpg)
+[![LinkedIn is for gaming](store/promo/marquee-promo-tile.jpg)](https://chromewebstore.google.com/detail/dpjdldibnlfjlladnpfdncijbilclibn)
 
 LinkedIn, minus LinkedIn. Just the daily games.
+
+**→ [Install from the Chrome Web Store](https://chromewebstore.google.com/detail/dpjdldibnlfjlladnpfdncijbilclibn)**
 
 Two modes, toggled from the page:
 
