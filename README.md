@@ -1,5 +1,7 @@
 # 🎮 LinkedIn is for Gaming
 
+![LinkedIn is for gaming](store/promo/marquee-promo-tile.jpg)
+
 LinkedIn, minus LinkedIn. Just the daily games.
 
 Two modes, toggled from the page:
