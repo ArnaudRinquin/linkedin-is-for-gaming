@@ -1,0 +1,44 @@
+name: Release to Chrome Web Store
+
+# Tag a release (git tag v1.2.0 && git push --tags) to build + upload + publish.
+# Requires repo secrets: CWS_EXTENSION_ID, CWS_CLIENT_ID, CWS_CLIENT_SECRET,
+# CWS_REFRESH_TOKEN — see store/listing.md for how to generate them.
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check tag matches manifest version
+        run: |
+          MANIFEST_V=$(jq -r .version manifest.json)
+          TAG_V="${GITHUB_REF_NAME#v}"
+          if [ "$MANIFEST_V" != "$TAG_V" ]; then
+            echo "Tag $TAG_V != manifest.json version $MANIFEST_V" >&2
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build zip
+        run: npm run build
+
+      - name: Upload & publish to Chrome Web Store
+        run: npx chrome-webstore-upload-cli@3 upload --source dist/linkedin-is-for-gaming.zip --auto-publish
+        env:
+          EXTENSION_ID: ${{ secrets.CWS_EXTENSION_ID }}
+          CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+
+      - name: Attach zip to GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/linkedin-is-for-gaming.zip

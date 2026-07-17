@@ -1,0 +1,259 @@
+/* LinkedIn is for Gaming — strip the chrome, keep the games */
+
+/* ---- LinkedIn chrome hiding (only when stripping is enabled) ---- */
+html.lifg-on header#global-nav,
+html.lifg-on #msg-overlay,
+html.lifg-on aside.msg-overlay-container,
+html.lifg-on .msg-overlay-list-bubble,
+html.lifg-on .global-alert-banner,
+html.lifg-on footer.global-footer,
+html.lifg-on .global-footer-compact,
+html.lifg-on section.scaffold-layout-toolbar {
+  display: none !important;
+}
+
+/* game pages stay plain-faced even when the extension is paused.
+   #interop-outlet is the shadow-DOM host of the messaging bubble */
+#root header,
+#interop-outlet,
+iframe[src*="/preload"] {
+  display: none !important;
+}
+
+/* paused mode: our bar keeps the top, LinkedIn's nav slides below it */
+html:not(.lifg-on) header#global-nav {
+  top: 52px !important;
+}
+html:not(.lifg-on) body:has(#global-nav) {
+  margin-top: 52px !important;
+}
+
+/* ---- game switcher bar (only rendered when LinkedIn is shown) ---- */
+#lifg-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52px;
+  z-index: 2147483000;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  background: #fff;
+  border-bottom: 1px solid #dcdcdc;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow-x: auto;
+  scrollbar-width: none;
+  box-sizing: border-box;
+}
+#lifg-bar::-webkit-scrollbar {
+  display: none;
+}
+/* LinkedIn styles a:visited & friends with higher specificity — hard override */
+#lifg-bar a,
+#lifg-bar a:link,
+#lifg-bar a:visited,
+#lifg-bar a:hover,
+#lifg-bar a:active {
+  text-decoration: none !important;
+}
+
+#lifg-bar .lifg-brand,
+#lifg-bar .lifg-brand:visited,
+#lifg-bar .lifg-brand:hover {
+  color: #0a66c2 !important;
+  font-weight: 700;
+  font-size: 13px;
+  white-space: nowrap;
+  flex: none;
+  position: sticky;
+  left: -12px;
+  z-index: 2;
+  background: #fff;
+  padding: 16px 10px 16px 12px;
+  margin-left: -12px;
+}
+
+#lifg-bar .lifg-chip,
+#lifg-bar .lifg-chip:link,
+#lifg-bar .lifg-chip:visited {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 17px;
+  background: #eef3f8;
+  color: #3d4c5c !important;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1;
+  border: 1px solid transparent;
+}
+#lifg-bar .lifg-chip:hover {
+  background: #dde7f1;
+  color: #1d2b3a !important;
+}
+#lifg-bar .lifg-chip .lifg-time {
+  font-weight: 400;
+  font-size: 12px;
+  color: #6b7f92 !important;
+  font-variant-numeric: tabular-nums;
+}
+#lifg-bar .lifg-chip.lifg-done {
+  opacity: 0.65;
+}
+#lifg-bar .lifg-chip.lifg-next,
+#lifg-bar .lifg-chip.lifg-next:link,
+#lifg-bar .lifg-chip.lifg-next:visited {
+  background: #0a66c2;
+  color: #fff !important;
+  opacity: 1;
+}
+#lifg-bar .lifg-chip.lifg-next:hover {
+  background: #004182;
+  color: #fff !important;
+}
+#lifg-bar .lifg-chip.lifg-next .lifg-time {
+  color: #cfe2f3 !important;
+}
+#lifg-bar .lifg-chip.lifg-current {
+  border-color: #0a66c2;
+}
+
+/* bar toggle: back to games-only mode */
+#lifg-toggle {
+  flex: none;
+  margin-left: auto;
+  position: sticky;
+  right: -12px;
+  z-index: 2;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 17px;
+  border: 1px solid #c4c4c4;
+  background: #fff;
+  color: #5f6b76;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: -8px 0 8px #fff;
+}
+#lifg-toggle:hover {
+  background: #f3f6f8;
+  color: #1d2b3a;
+}
+
+/* ---- hub hero (games-only mode): title + show-LinkedIn toggle ---- */
+/* lives inside LinkedIn's own hub container, so it inherits its alignment */
+#lifg-hero {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+#lifg-hero .lifg-hero-title {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #1b1f23;
+  margin: 0;
+  line-height: 1.1;
+}
+#lifg-hero .lifg-hero-title b {
+  color: #0a66c2;
+  font-weight: 800;
+}
+#lifg-hero .lifg-hero-toggle {
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 18px;
+  border: 1px solid #c4c4c4;
+  background: #fff;
+  color: #5f6b76;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+}
+#lifg-hero .lifg-hero-toggle:hover {
+  background: #f3f6f8;
+  color: #1d2b3a;
+}
+
+/* ---- per-game connections leaderboard under each hub card ---- */
+/* the hub grid cell must not stretch the card once we add content below it */
+li.pr-game-hub__card {
+  display: flex !important;
+  flex-direction: column !important;
+}
+li.pr-game-hub__card > a.ps-game-entrypoint-card {
+  flex: 0 0 auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+.lifg-lb {
+  margin: 10px 0 12px;
+  box-sizing: border-box;
+  background: #f6f5f2;
+  border: 1px solid #e5e2dc;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12.5px;
+  color: #3d3d3d;
+}
+.lifg-lb-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #949494;
+  margin-bottom: 3px;
+}
+.lifg-lb-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 0;
+  line-height: 1.5;
+}
+.lifg-lb-rank {
+  flex: none;
+  width: 22px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  color: #7a7a7a;
+}
+.lifg-lb-name {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lifg-lb-row.lifg-me .lifg-lb-name {
+  font-weight: 700;
+  color: #0a66c2;
+}
+.lifg-lb-score {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+  color: #555;
+  font-weight: 600;
+}
+.lifg-lb-flaw {
+  flex: none;
+  font-size: 11px;
+}

@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "LinkedIn is for Gaming",
+  "version": "1.0.0",
+  "description": "LinkedIn, minus LinkedIn. Just the daily games: plain puzzles, leaderboards at a glance, and a next-game navigator.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://www.linkedin.com/*", "*://linkedin.com/*"],
+      "js": ["redirect.js", "games.js"],
+      "css": ["games.css"],
+      "run_at": "document_start"
+    }
+  ]
+}

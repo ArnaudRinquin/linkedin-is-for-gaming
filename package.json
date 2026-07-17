@@ -1,0 +1,16 @@
+{
+  "name": "linkedin-is-for-gaming",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chrome extension: LinkedIn, minus LinkedIn. Just the daily games.",
+  "scripts": {
+    "build": "rm -rf dist && mkdir -p dist && zip -r dist/linkedin-is-for-gaming.zip manifest.json redirect.js games.js games.css icons -x 'icons/icon512.png'",
+    "upload": "chrome-webstore-upload upload --source dist/linkedin-is-for-gaming.zip",
+    "release": "chrome-webstore-upload upload --source dist/linkedin-is-for-gaming.zip --auto-publish",
+    "assets": "node scripts/take-screenshots.mjs"
+  },
+  "devDependencies": {
+    "chrome-webstore-upload-cli": "^3.3.1",
+    "playwright": "^1.49.0"
+  }
+}
