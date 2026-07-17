@@ -1,6 +1,6 @@
 {
   "name": "linkedin-is-for-gaming",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Chrome extension: LinkedIn, minus LinkedIn. Just the daily games.",
   "scripts": {
