@@ -11,6 +11,8 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # create the GitHub release + attach the zip
     steps:
       - uses: actions/checkout@v4
 
