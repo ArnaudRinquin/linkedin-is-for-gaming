@@ -22,7 +22,7 @@ Two modes, toggled from the page:
 
 ## Install
 
-**[Chrome Web Store](https://chromewebstore.google.com/detail/dpjdldibnlfjlladnpfdncijbilclibn/)** (in review)
+**[Chrome Web Store](https://chromewebstore.google.com/detail/dpjdldibnlfjlladnpfdncijbilclibn/)**
 
 Or from source:
 
