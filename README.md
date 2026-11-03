@@ -30,21 +30,6 @@ Or from source:
 2. Enable **Developer mode** (top right)
 3. **Load unpacked** → select this folder
 
-## How it works
+## How it works / build your own
 
-- `redirect.js` — bounces any non-game LinkedIn path to `/games/` (login/checkpoint/authwall paths are allowed through)
-- `games.css` — hides LinkedIn chrome on the hub (Ember app) and game pages (React app), styles the bar
-- `games.js` — fetches per-game solved-state from LinkedIn's own Voyager API
-  (`voyagerIdentityDashGameEntryPoints`, the same call the hub makes), leaderboards from
-  `voyagerIdentityDashGameConnectionsEntities` (rank/time window around you, same data as
-  the results page), and reads solve times from the games'
-  `play:timeElapsed:(member,gameType,puzzle)` localStorage keys
-- Toggle state lives in a `lifg_off` cookie on linkedin.com (localStorage doesn't work:
-  LinkedIn runs a janitor that deletes keys not on its allowlist); the chrome-hiding CSS
-  is gated on an `html.lifg-on` class set at document_start
-
-Game type IDs: 1 Pinpoint, 2 Crossclimb, 3 Queens, 4 Wend, 5 Tango, 6 Zip, 7 Mini Sudoku, 8 Patches.
-
-Notes:
-- Solve times are per-device (localStorage); solved-state is cross-device (API)
-- If LinkedIn rotates the API `queryId`, the bar degrades gracefully (chips without state)
+Architecture, API details, gotchas, and how to build a similar extension: see [RECIPE.md](RECIPE.md).
